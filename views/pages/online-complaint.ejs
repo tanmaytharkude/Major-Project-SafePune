@@ -1,0 +1,70 @@
+<% layout("/layouts/boilerplate") %>
+<div class="col-8 offset-2">
+  <br>
+  <h3>File a Complaint :</h3>
+  <form class="needs-validation"  method="POST" action="/online-complaint" novalidate>
+    <div class="mb-3">
+      <label for="personName" class="form-label">Name:</label>
+      <input name="listing[personName]" 
+      placeholder="Enter your Name" 
+      type="text" 
+      class="form-control"
+      required
+      />
+      <div class="valid-feedback">Name looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address:</label>
+      <input name="listing[address]" 
+      placeholder="Enter your Address" 
+      type="text" 
+      class="form-control"
+      required
+      />
+      <div class="invalid-feedback">Enter valid address!</div>
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone:</label>
+      <input name="listing[phoneNumber]" 
+      placeholder="Enter your Phone-number" 
+      type="number"
+      class="form-control"
+      required
+      />
+      <div class="invalid-feedback">Enter valid numbers!</div>
+    </div>
+    <div class="mb-3">
+      <label for="complaintName" class="form-label">Complaint-name:</label>
+      <input name="listing[complaintName]" 
+      placeholder="Enter Complaint-name" 
+      type="text"
+      class="form-control"
+      required
+      />
+      <div class="invalid-feedback">Enter valid info!</div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea 
+        name="listing[description]" 
+        placeholder="Enter Description" 
+        class="form-control"
+        required
+      ></textarea>
+      <div class="invalid-feedback">Enter short description!</div>
+    </div>
+    <div class="mb-3">
+      <label for="dateOccurred" class="form-label">Date:</label>
+      <input name="listing[dateOccurred]" 
+      placeholder="Date when incident Occured" 
+      type="date"
+      class="form-control"
+      required
+      />
+      <div class="invalid-feedback">Enter valid Date!</div>
+    </div>
+    <button class="btn btn-dark">Submit</button>
+    <br><br>
+  </form>
+</div>
+  

@@ -1,0 +1,76 @@
+<% layout ("/layouts/boilerplate") -%> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePune</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+  
+    <div class="card mb-3 card1">
+        <div class="row g-2">
+          <div class="col-md-3">
+            <img class="chief" src="https://content.presentermedia.com/content/clipart/00023000/23544/police_symbol_800_wht.jpg" class="img-fluid rounded-start" alt="PunePolice-symbol">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Meet the Chief</h5>
+              <p class="card-text">
+                Namaskar, Punekars.<br>
+                Our city Pune, a major IT, education and Cultural hub is home to informed and educated citizens who believe in actively participating in governance at all levels. I feel honoured to be heading Pune’s Police Force and want to ensure we enforce law of the land impartially, firmly and without fear or favor. We strive to create a fear-free environment that is conducive to growth and development of our beautiful city.
+                Our mission is to prevent, deter and detect crime. To achieve this, we focus on these 4 broad areas: Frontline Policing, Community Engagement, Comprehensive Investigations and Use of Technology.
+                I want you to know that Pune Police is always available in your service.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <h1 class="moto">"सद्रक्षणाय खलनिग्रहणाय"</h1>  
+    <div class="round">
+        <img  src="https://www.theprotector.in/wp-content/uploads/2020/06/pune-police3-1024x548.jpg">
+        <img  src="https://www.theprotector.in/wp-content/uploads/2020/06/pune-police1.jpg">
+        <img  src="https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/15100207/14092017_PunePolice_02.jpg?w=1200&h=628&fill=blur&fit=fill">
+        <img  src="https://d282wbz2keffpz.cloudfront.net/wp-content/uploads/2020/04/04175456/Pune-Police1.jpg">
+    </div>
+
+    <div class="container mt-5">
+      <form class="d-flex flex-column align-items-center" role="search">
+          <h1 class="mb-4">Find Your Nearest Police Station</h1>
+          <div class="form-group">
+              <select id="station-select" class="form-control">
+                  <option value="">Select a police station</option>
+              </select>
+          </div>
+      </form>
+    </div>
+
+    <div class="map">
+      <div id="map"></div>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="text-center">Latest Crime and Police News in Pune</h1>
+      <div class="row justify-content-center" id="news-container">
+      </div>
+    </div>
+    
+    <div class="col-md-6  instagram-container">
+      <div class="card mb-4">
+        <div class="card-header">
+          Visit Instagram Handle
+        </div>
+        <div class="card-body">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Cypx0YwIQ_2/" data-instgrm-version="14"></blockquote>
+          <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/map.js"></script>
+    <script src="/js/news.js"></script>
+</body>
+</html>

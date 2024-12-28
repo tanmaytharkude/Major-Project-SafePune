@@ -1,0 +1,163 @@
+body{
+  display:flex ;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+  flex: 1;
+}
+.mission-section {
+  background-color: #f8f9fa;
+  padding: 4rem;
+}
+.mission-section h2 {
+  color: #000000;
+  font-size: 2.3rem ;
+}
+li{
+  font-size: 1.2rem;
+}
+.image{
+  height: 3.5rem;
+  width: 3rem;
+}
+.navbar{
+  border-radius: 2.5rem ;
+  border: black solid 1.5px;
+  margin: 2rem; 
+  background-color:  #e9ecef;
+}
+.nav-link{
+  color: black!important;
+}
+.navbar2 {
+  background-color: #ff8635; 
+  height: 3rem;
+  padding-left: 10rem;
+  border-top-left-radius: 1rem;
+  margin-left: 2rem;
+  margin-bottom: 1.2rem;
+}
+.navbar2 .nav-item {    
+  margin-right: 3.5rem!important; 
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.footer1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.img-fluid{
+  height: 3.4rem!important;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
+.footer2{
+  background-color: #ff730f; 
+  width: 100%;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.branch{
+  padding-left: 10.5rem!important;
+}
+.moto{
+  text-align: center;
+  color: #000000;
+  margin-top: 3rem;
+}
+.round{
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+.round img{
+  height: 12rem;
+  width: 14rem;
+  border:2px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.card1{
+  background-color: #f8f9fa!important;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.chief{
+  height: 15rem;
+  width: 17rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
+}
+#map{
+  height: 400px !important;
+  width: 140vh !important;
+}
+.map{
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+}
+.map-txt{
+  display: flex;
+  justify-content: center;
+}
+.news-card {
+  display: flex;
+  flex-direction: column;
+  height: 80vh!important;
+  margin-top: 1rem;
+}
+.news-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  flex-grow: 1;
+}
+.news-card img {
+  height: 200px;
+  object-fit: cover;
+}
+.news-card .btn {
+  margin-top: auto; 
+}
+.instagram-container{
+  
+  margin-top: 2rem;
+  height: 58rem;
+  width: 40rem;
+}
+.instagram-container .card-header
+{
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+.instagram-media
+{
+  height: 50rem;
+  width:30rem;
+}
+
+@media (max-width: 576px) {
+  .navbar2  {
+    height: 5.5rem!important;
+  }
+  .navbar2 .navbar-nav .nav-item {
+    text-align: left!important;
+    font-size: 10px!important;
+  }
+  .branch img{
+    max-height: 13.5rem!important;
+    max-width: 22rem;
+  }
+  .instagram-media {
+    width: 27rem !important;
+    height: 25rem !important;
+  }
+}
