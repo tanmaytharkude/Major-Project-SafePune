@@ -1,6 +1,10 @@
+if(process.env.NODE_ENV != "production")
+{
+  require('dotenv').config();
+}
+
 const express = require("express"); 
 const app = express();
-const mongoose = require("mongoose");
 const path = require("path")
 const ejsMate = require("ejs-mate");
 const Complaint = require("./models/complaint.js");
@@ -11,6 +15,9 @@ const {listingSchema,reportSchema}=require("./schema.js");
 const bodyParser = require('body-parser');
 const session = require("express-session");
 const flash = require("connect-flash");
+const { ref, set, push } = require("firebase/database");
+const { database } = require("./firebaseConfig");
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +27,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 const sessionOptions = {
-  secret:"mysupersecretstring",
+  secret:process.env.SECRET,
   resave:false,
   saveUninitialized:true,
   cookie:{
@@ -33,29 +40,28 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/SafePune";
+async function saveComplaint(listing) {
+  const complaintRef = ref(database, "complaints"); 
+  const newComplaintRef = push(complaintRef); 
+  await set(newComplaintRef, listing); 
+}
 
-main().then(()=>{
-  console.log("connected to DB");
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
-  async function main()
-  {
-    await mongoose.connect(MONGO_URL);
-  }
-
+async function saveReport(report) {
+  const reportRef = ref(database, "reports"); 
+  const newReportRef = push(reportRef); 
+  await set(newReportRef, report); 
+}
 
 app.get("/test",(req,res)=>{
   res.send("Test successful");
 })
-// Routes
+
 app.get("/",wrapAsync(async(req,res)=>{
   res.render("pages/index.ejs");
 }));
@@ -83,6 +89,20 @@ app.get('/traffic-branch',wrapAsync(async(req, res) => {
 app.get('/head-quarter',wrapAsync(async(req, res) => {
   res.render("pages/head-quarter.ejs");
 }));
+
+app.get("/read-user/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const snapshot = await get(child(ref(database), `users/${userId}`));
+    if (snapshot.exists()) {
+      res.send(snapshot.val());
+    } else {
+      res.status(404).send("User data not found.");
+    }
+  } catch (error) {
+    res.status(500).send(`Error reading data: ${error.message}`);
+  }
+});
 
 const validateListing = (req,res,next)=>{
     if(!req.body.listing)
@@ -119,20 +139,39 @@ const validateReport= (req,res,next)=>{
     }
 }
 
-app.post("/online-complaint",validateListing, wrapAsync(async (req,res,next)=>{
-    const newListing = new Complaint (req.body.listing);
-    await newListing.save();
-    req.flash("success","Complaint Is Filed!");
+app.post("/online-complaint", validateListing, wrapAsync(async (req, res, next) => {
+  try {
+    const listing = req.body.listing;
+    await saveComplaint(listing); 
+    req.flash("success", "Complaint Is Filed!");
     res.redirect("/");
-  })
-);
-
-app.post("/report-us",validateReport,wrapAsync(async (req,res)=>{
-  const newReport = new Report (req.body.report);
-  await newReport.save();
-  req.flash("success","Review Is Added!");
-  res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
 }));
+
+app.post("/report-us", validateReport, wrapAsync(async (req, res) => {
+  try {
+    const report = req.body.report;
+    await saveReport(report);
+    req.flash("success", "Review Is Added!");
+    res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
+}));
+
+app.post("/write-user", async (req, res) => {
+  const { userId, name, email } = req.body;
+  try {
+    await set(ref(database, `users/${userId}`), { username: name, email: email });
+    req.flash("success", "User data written successfully!");
+    res.redirect("/");
+  } catch (error) {
+    req.flash("error", `Failed to write user data: ${error.message}`);
+    res.redirect("/");
+  }
+});
 
 app.all("*",(req,res,next)=>{
   next(new ExpressError(404,"Page Not Found!"));
